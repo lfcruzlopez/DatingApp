@@ -1,25 +1,57 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Carousel</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+    <div class="container">
+        <a class="navbar-brand" href="#">Dating App</a>
+          <ul class="navbar-nav me-auto" *ngIf="accountService.currentUser$| async">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Matches</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Lists</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Messages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Disabled</a>
+              </li>
+          </ul>
+<!--           <div class="downdown" *ngIf="loggedIn" dropdown >  
+            <a href="" class="dropdown-toggle text-light" dropdownToggle>Welcome user</a>
+            <div class="dropdown-menu mt-3 dropdown-menu-right" *dropdownMenu>
+              <a  class="dropdown-item">Edit Profile</a>
+              <div class="dropdown-divider"></div>
+              <a  class="dropdown-item" (click)="logout()">Logout</a>
+            </div>
+          </div> -->
+
+          <div class="btn-group" dropdown #dropdown="bs-dropdown" *ngIf="accountService.currentUser$| async" [autoClose]="false">
+            <button id="button-basic" dropdownToggle type="button" 
+               class="btn btn-primary dropdown-toggle"
+               aria-controls="dropdown-basic">
+               Welcome User <span class="caret"></span>
+            </button>
+                <div id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                  role="menu" aria-labelledby="button-basic">
+                  <a  class="dropdown-item">Edit Profile</a>
+                  <div class="dropdown-divider"></div>
+                  <a  class="dropdown-item" (click)="logout()">Logout</a>
+              </div>
+         </div>
+          <form *ngIf="(accountService.currentUser$| async) === null" #loginFrom = "ngForm" class="d-flex" (ngSubmit) ="login()" autocomplete="off" >
+            <input 
+                    name="username"
+                    [(ngModel)]="model.username"
+                    class="form-control me-5" type="text" 
+                    placeholder="Username">
+            <input 
+                    name="password"
+                    [(ngModel)]="model.password"
+                    class="form-control me-2" 
+                    type="password" 
+                    placeholder="Passowrd">
+
+            <button class="btn btn-outline-success" 
+                    type="submit">Login</button>
+          </form>
     </div>
   </nav>
