@@ -26,7 +26,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 for(const key in error.error.errors)
                 {
                   if(error.error.errors[key]){
-                    modalStateErrors.push(error.error.errors)
+                    modalStateErrors.push(error.error.errors[key])
                   }
                 }
                 throw modalStateErrors.flat();
@@ -42,10 +42,10 @@ export class ErrorInterceptor implements HttpInterceptor {
               break;
 
             case 500:
-              const navigationExtras: NavigationExtras ={state:error.error};
-              this.router.navigateByUrl('/sever-error',navigationExtras);
+              const navigationExtras: NavigationExtras ={state: {error: error.error}};
+              this.router.navigateByUrl('/server-error',navigationExtras);
               break;
-          
+
             default:
               this.toastr.error('Something unexpected went wrong');
               console.log(error);

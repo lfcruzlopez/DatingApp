@@ -11,7 +11,9 @@ export class TestErrorComponent  {
 
   baseUrl = 'https://localhost:5001/api/'
 
-  constructor(private http: HttpClient) { 
+  validationErrors: string[]=[];
+
+  constructor(private http: HttpClient) {
 
   }
 
@@ -55,8 +57,9 @@ get400ValidationError(){
     console.log(response);
   }, error =>{
     console.log(error);
+    this.validationErrors = error;
   })
 }
 
- 
+
 }
