@@ -17,7 +17,6 @@
             <a class="nav-link" routerLink='/errors' routerLinkActive='active'>Errors</a>
           </li>
           </ul>
-
           <div class="btn-group" dropdown #dropdown="bs-dropdown" *ngIf="(accountService.currentUser$| async) as user" [autoClose]="false">
             <button id="button-basic" dropdownToggle type="button" 
                class="btn btn-primary dropdown-toggle"

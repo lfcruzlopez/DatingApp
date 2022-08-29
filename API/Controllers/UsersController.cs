@@ -12,9 +12,9 @@ using AutoMapper;
 
 namespace API.Controllers
 {
-    // [ApiController]
-    // [Route("api/[controller]")]
-    [Authorize]
+    [ApiController]
+    [Route("api/[controller]")]
+    //[Authorize]
     public class UsersController : BaseController
     {
         private readonly IUserRepository _userRepository;
